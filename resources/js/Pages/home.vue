@@ -1,4 +1,16 @@
-<script setup></script>
+<script setup>
+import {useUserProgressionStore} from "@/Stores/UserProgressionStore.js";
+
+const props = defineProps({
+    userProgression : {type : Object}
+})
+
+const UserProgression = useUserProgressionStore()
+
+UserProgression.populateAchievements(props.userProgression.achievements)
+UserProgression.populateProgress(props.userProgression.progress)
+
+</script>
 
 <template>
     <div class="m-0 flex h-screen w-screen flex-1 justify-center bg-slate-700">

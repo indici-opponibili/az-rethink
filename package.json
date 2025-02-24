@@ -18,7 +18,7 @@
         "@sentry/vite-plugin": "^2.14.2",
         "@sentry/vue": "^7.102.1",
         "@vitejs/plugin-vue": "^5.0.4",
-        "pinia": "^2.1.7",
+        "pinia": "^2.3.1",
         "vue": "^3.4.21",
         "vue-i18n": "^9.10.1",
         "vue-router": "^4.3.0"
