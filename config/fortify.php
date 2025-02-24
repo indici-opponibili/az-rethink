@@ -73,11 +73,11 @@ return [
     |
     */
 
-    'home' => '/home',
+    'home' => '/app',
 
     /*
     |--------------------------------------------------------------------------
-    | Fortify Routes Prefix / Subdomain
+    | Fortify libraries Prefix / Subdomain
     |--------------------------------------------------------------------------
     |
     | Here you may specify which prefix Fortify will assign to all the routes
@@ -92,7 +92,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Fortify Routes Middleware
+    | Fortify libraries Middleware
     |--------------------------------------------------------------------------
     |
     | Here you may specify which middleware Fortify will assign to the routes
@@ -121,7 +121,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Register View Routes
+    | Register View libraries
     |--------------------------------------------------------------------------
     |
     | Here you may specify if the routes returning views should be disabled as
@@ -130,7 +130,7 @@ return [
     |
     */
 
-    'views' => false,
+    'views' => true,
 
     /*
     |--------------------------------------------------------------------------

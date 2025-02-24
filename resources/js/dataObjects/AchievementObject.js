@@ -10,8 +10,9 @@ export class AchievementObject {
 
         this.isComplete = () => this._currentStep === this._totalSteps
 
-        this.advance = async (toStep = null, sendToServer = false) => {
-            if(this.isComplete || (toStep!=null && toStep <= this._currentStep)){
+        this.advance = (toStep = null, sendToServer = false) => {
+            //abort IF is completed OR the step we want to go is lower than the current one
+            if(this.isComplete() || (toStep!=null && toStep <= this._currentStep)){
                 return false
             } else {
                 let stepsToAdvance = 1
@@ -23,9 +24,6 @@ export class AchievementObject {
                     if(sendToServer){
                         remote.addAchievementToUser(this.tag, this._currentStep)
                     }
-                }
-                if(this._currentStep >= this._totalSteps){
-                    this.isComplete = true
                 }
                 return true
             }

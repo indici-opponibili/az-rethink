@@ -1,14 +1,16 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import Home from '@/Pages/home.vue'
+import Home from '@/Pages/Home.vue'
 
 export const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
-            path: '/',
+            path: "/",
             component: Home,
-            name: "Home"
+            name: "Home",
+            alias: ["/app"],
+            //meta: { transition: "operas" }
         },
     ]
 });

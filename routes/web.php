@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AppController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,3 +24,6 @@ Route::get('/app{path}', [AppController::class, 'main'])
     ->where('path', '.*') // https://stackoverflow.com/q/34634758/11599600, also mind the missing / (must be that way!)
     ->middleware(['auth', 'verified'])
     ->name('app');
+
+Route::post('/guest-login', [UserController::class, 'createGuestUser'])
+    ->middleware('guest');

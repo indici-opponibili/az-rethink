@@ -17,11 +17,13 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/home';
+    public const string HOME = 'app';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
+    public const string LOGIN = 'login';
+
     public function boot(): void
     {
         RateLimiter::for('api', function (Request $request) {
