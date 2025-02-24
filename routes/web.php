@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -14,6 +15,11 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('home');
-})->name('home');;
+Route::get('/')
+    ->middleware(['auth', 'guest', 'verified'])
+    ->name('home');
+
+Route::get('/app{path}', [AppController::class, 'main'])
+    ->where('path', '.*') // https://stackoverflow.com/q/34634758/11599600, also mind the missing / (must be that way!)
+    ->middleware(['auth', 'verified'])
+    ->name('app');
