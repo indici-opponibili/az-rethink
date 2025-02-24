@@ -11,11 +11,6 @@ const UserProgression = useUserProgressionStore()
 UserProgression.populateAchievements(props.userProgression.data.achievements)
 UserProgression.populateProgress(props.userProgression.data.progress)
 
-//UserProgression.advanceAchievement("achievement_1")
-//UserProgression.advanceProgress("video_2_viewed")
-
-console.log(UserProgression.isAchievementComplete("achievement_1"))
-console.log(UserProgression.isProgressComplete("video_2_viewed"))
 </script>
 
 <template>

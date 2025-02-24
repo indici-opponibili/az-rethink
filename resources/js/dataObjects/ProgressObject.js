@@ -11,7 +11,8 @@ export class ProgressObject{
         this.isComplete = () => this._currentStep === this._totalSteps
 
         this.advance = async (toStep = null, sendToServer = false) => {
-            if(this.isComplete || (toStep!=null && toStep <= this._currentStep)){
+
+            if(this.isComplete() || (toStep!=null && toStep <= this._currentStep)){
                 return false
             } else {
                 let stepsToAdvance = 1
@@ -23,9 +24,6 @@ export class ProgressObject{
                     if(sendToServer){
                         remote.addProgressToUser(this.tag, this._currentStep, this._category)
                     }
-                }
-                if(this._currentStep >= this._totalSteps){
-                    this.isComplete = true
                 }
                 return true
             }

@@ -19,8 +19,10 @@ export class AchievementObject {
                 if(toStep!=null && toStep <= this._totalSteps){
                     stepsToAdvance = toStep-this._currentStep
                 }
+                console.log(this._currentStep)
                 for(let i = 0; i < stepsToAdvance; i++){
                     this._currentStep += 1
+                    console.log(this._currentStep)
                     if(sendToServer){
                         remote.addAchievementToUser(this.tag, this._currentStep)
                     }

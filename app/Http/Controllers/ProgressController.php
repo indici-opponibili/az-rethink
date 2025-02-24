@@ -16,8 +16,9 @@ class ProgressController extends Controller
                 'tag' => $input['tag'],
                 'step' => $input['step'],
                 'category' => $input['category'],
+                'user_id' => $user->id,
             ]
         );
-        $user->progress()->create($progress);
+        $user->progress()->save($progress);
     }
 }

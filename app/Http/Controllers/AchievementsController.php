@@ -15,7 +15,8 @@ class AchievementsController extends Controller
             [
                 'tag' => $input['tag'],
                 'step' => $input['step'],
+                'user_id' => $user->id,
             ]);
-        $user->achievements()->create($achievement);
+        $user->achievements()->save($achievement);
     }
 }
