@@ -1,16 +1,15 @@
-﻿import {remote} from "@/Libraries/remote.js";
+﻿import {remote} from "@/Libraries/Remote/Remote.js";
 
-export class ProgressObject{
+export class ContentProgressObject {
     constructor(progressJson){
         this.tag = progressJson.tag
         this._category = progressJson.category
         this._totalSteps = progressJson.steps
         this._currentStep = 0
-        this.isComplete = false
 
         this.isComplete = () => this._currentStep === this._totalSteps
 
-        this.advance = async (toStep = null, sendToServer = false) => {
+        this.advance = (toStep = null, sendToServer = false) => {
 
             if(this.isComplete() || (toStep!=null && toStep <= this._currentStep)){
                 return false
@@ -22,7 +21,7 @@ export class ProgressObject{
                 for(let i = 0; i < stepsToAdvance; i++){
                     this._currentStep += 1
                     if(sendToServer){
-                        remote.addProgressToUser(this.tag, this._currentStep, this._category)
+                        remote.addContentProgressToUser(this.tag, this._currentStep, this._category)
                     }
                 }
                 return true

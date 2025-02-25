@@ -1,4 +1,4 @@
-﻿import {remote} from "@/Libraries/remote.js";
+﻿import {remote} from "@/Libraries/Remote/Remote.js";
 
 export class AchievementObject {
     constructor(achievementJson) {
@@ -6,7 +6,6 @@ export class AchievementObject {
         this.tag = achievementJson.tag
         this._totalSteps = achievementJson.steps
         this._currentStep = 0
-        this.isComplete = false
 
         this.isComplete = () => this._currentStep === this._totalSteps
 

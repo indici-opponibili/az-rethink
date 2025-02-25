@@ -2,22 +2,26 @@
 
 namespace App\Http\Resources;
 
+use App\Models\ContentProgress;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserProgressResource extends JsonResource
+class ContentProgressResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
+
+    /** @mixin ContentProgress */
+
     public function toArray(Request $request): array
     {
         return [
-            'achievements' => AchievementResource::collection($this->achievements),
-            'contentProgress' => ContentProgressResource::collection($this->contentProgress),
-            'courseProgress' => CourseProgressResource::collection($this->courseProgress)
+            'tag' => $this->tag,
+            'step' => $this->step,
+            'category' => $this->category
         ];
     }
 }

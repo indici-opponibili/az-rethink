@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Progress;
+use App\Models\ContentProgress;
 use Illuminate\Http\Request;
 
-class ProgressController extends Controller
+class ContentProgressController extends Controller
 {
     function addProgress(Request $request){
 
         $input = $request->all();
         $user = $request->user();
-        $progress = Progress::factory()->create(
+        $progress = ContentProgress::factory()->create(
             [
                 'tag' => $input['tag'],
                 'step' => $input['step'],
@@ -19,6 +19,6 @@ class ProgressController extends Controller
                 'user_id' => $user->id,
             ]
         );
-        $user->progress()->save($progress);
+        $user->contentProgress()->save($progress);
     }
 }

@@ -1,4 +1,4 @@
-﻿export const progress = [
+﻿export const contentProgress = [
     {
         tag : "video_1_viewed",
         category : "viewed_videos",

@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\AchievementsController;
 use App\Http\Controllers\AppController;
-use App\Http\Controllers\ProgressController;
+use App\Http\Controllers\ContentProgressController;
+use App\Http\Controllers\CourseProgressController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -33,5 +34,8 @@ Route::post('/guest-login', [UserController::class, 'createGuestUser'])
 Route::post('/user/achievements/add', [AchievementsController::class, 'addAchievement'])
     ->middleware(['auth', 'verified']);
 
-Route::post('/user/progress/add', [ProgressController::class, 'addProgress'])
+Route::post('/user/contentProgress/add', [ContentProgressController::class, 'addProgress'])
+    ->middleware(['auth', 'verified']);
+
+Route::post('/user/courseProgress/add', [CourseProgressController::class, 'addCourseProgress'])
     ->middleware(['auth', 'verified']);

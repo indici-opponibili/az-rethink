@@ -2,11 +2,11 @@
 
 namespace App\Http\Resources;
 
-use App\Models\Progress;
+use App\Models\CourseProgress;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ProgressResource extends JsonResource
+class CourseProgressResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -14,14 +14,14 @@ class ProgressResource extends JsonResource
      * @return array<string, mixed>
      */
 
-    /** @mixin Progress */
-
+    /**
+     * @mixin CourseProgress
+     */
     public function toArray(Request $request): array
     {
         return [
             'tag' => $this->tag,
-            'step' => $this->step,
-            'category' => $this->category
+            'status' => $this->status,
         ];
     }
 }

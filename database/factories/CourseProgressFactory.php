@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Progress>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\CourseProgress>
  */
-class ProgressFactory extends Factory
+class CourseProgressFactory extends Factory
 {
     /**
      * Define the model's default state.

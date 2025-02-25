@@ -20,12 +20,18 @@ function addAchievementToUser(tag, step){
         .catch(err => console.log(err))
 }
 
-function addProgressToUser(tag, step, category){
-    axios.post('/user/progress/add', {tag, step, category})
+function addContentProgressToUser(tag, step, category){
+    axios.post('/user/contentProgress/add', {tag, step, category})
+        .catch(err => console.log(err))
+}
+
+function addCourseProgressToUser(tag, status){
+    axios.post('/user/courseProgress/add', {tag, status})
         .catch(err => console.log(err))
 }
 
 export const remote = {
-    addProgressToUser,
-    addAchievementToUser
+    addContentProgressToUser,
+    addAchievementToUser,
+    addCourseProgressToUser
 }
