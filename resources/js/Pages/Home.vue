@@ -1,7 +1,6 @@
 ﻿<script setup>
 import {useUserProgressionStore} from "@/Stores/UserProgressionStore.js";
 import {useRoute, useRouter} from "vue-router";
-import {AppContent} from "@/Content/content.js";
 
 const props = defineProps({
     userProgression : {type : Object}

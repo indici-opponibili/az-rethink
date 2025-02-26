@@ -3,7 +3,7 @@ import {achievements as achievementJson} from "@/Content/achievements.js";
 import {contentProgress as contentProgressJson} from "@/Content/contentProgress.js"
 import {AchievementObject} from "@/DataObjects/AchievementObject.js";
 import {ContentProgressObject} from "@/DataObjects/ContentProgressObject.js";
-import {AppContent} from "@/Content/content.js";
+import {AppData} from "@/Content/AppData.js";
 import {CourseProgressObject} from "@/DataObjects/CourseProgressObject.js";
 
 export const useUserProgressionStore = defineStore("userProgression", {
@@ -40,11 +40,15 @@ export const useUserProgressionStore = defineStore("userProgression", {
         },
         populateContentProgress(remoteProgress){
             contentProgressJson.forEach(item => this.contentProgressMap[item.tag] = new ContentProgressObject(item))
+            AppData.glossary.forEach(group => group.items.forEach(word => {
+                const {tag, wordAsProgress} = wordToProgress(word.id)
+                this.contentProgressMap[tag] = new ContentProgressObject(wordAsProgress)
+            }))
             //a bit of error handling is needed
             remoteProgress.forEach(item => this.contentProgressMap[item.tag].advance(item.step))
         },
         populateCoursesProgress(remoteProgress){
-            for (const course of AppContent.courses){
+            for (const course of AppData.courses){
                 console.log(course)
                 const courseTag = getCourseProgressTag(course.id)
                 this.courseProgressMap[courseTag] = new CourseProgressObject(courseTag)
@@ -76,6 +80,10 @@ export const useUserProgressionStore = defineStore("userProgression", {
         setChapterStatus(courseId, levelId, chapterId, status){
             const chapterTag = getChapterProgressTag(courseId, levelId,chapterId)
             return this.courseProgressMap[chapterTag].setStatus(status, true)
+        },
+        unlockWord(wordId){
+            const {tag} = wordToProgress(wordId)
+            return this.advanceContentProgress(tag)
         }
     },
 })
@@ -91,4 +99,16 @@ function getLevelProgressTag(courseId, levelId){
 
 function getChapterProgressTag(courseId, levelId, chapterId){
     return `CH${chapterId}_LV${levelId}_CO${courseId}`;
+}
+
+function wordToProgress(id){
+    const tag = `word_${id}`
+    return {
+        tag,
+        wordAsProgress : {
+            tag,
+            steps : 1,
+            category : "glossary_word"
+        }
+    }
 }

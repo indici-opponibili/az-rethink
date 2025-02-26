@@ -51,7 +51,7 @@ const getGlossaryWordFromId = (wordId) => (
         id : wordId
     })
 
-export const AppContent = {
+export const AppData = {
     courses : coursesIds.map(courses => getCourseFromId(courses)),
     glossary : Object.keys(glossaryWordsGroupsMap).map(key => getGlossaryGroupFromId(parseInt(key))),
 }
