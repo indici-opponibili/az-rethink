@@ -1,6 +1,8 @@
 ﻿<script setup>
 import {useUserProgressionStore} from "@/Stores/UserProgressionStore.js";
 import {useRoute, useRouter} from "vue-router";
+import {onMounted} from "vue";
+import {unmute} from "@/Libraries/external/unmute.js";
 
 const props = defineProps({
     userProgression : {type : Object}
@@ -16,6 +18,15 @@ UserProgression.populateCoursesProgress(props.userProgression.data.courseProgres
 UserProgression.setCourseStatus(1, "unlocked")
 
 const route = useRoute();
+
+onMounted(() => {
+    let context = (window.AudioContext || window.webkitAudioContext) ?
+        new (window.AudioContext || window.webkitAudioContext)() : null;
+
+    if (context) {
+        unmute(context);
+    }
+})
 
 </script>
 
