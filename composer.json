@@ -2,10 +2,16 @@
     "name": "indici-opponibili/laravel-inertia-vue-template",
     "type": "project",
     "description": "Template for Laravel+Inertia+Vue.",
-    "keywords": ["template", "laravel", "inertia", "vue"],
+    "keywords": [
+        "template",
+        "laravel",
+        "inertia",
+        "vue"
+    ],
     "license": "proprietary",
     "require": {
         "php": "^8.3",
+        "filament/filament": "^3.2",
         "guzzlehttp/guzzle": "^7.8",
         "inertiajs/inertia-laravel": "^1.0",
         "laravel/fortify": "^1.25",
@@ -38,7 +44,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

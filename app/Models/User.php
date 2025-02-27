@@ -3,6 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,10 +13,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens, HasFactory, Notifiable, Prunable;
 
+    const TYPE_ADMIN = 'admin';
+    const TYPE_GUEST = 'guest';
+    const TYPE_REGISTERED = 'registered';
     /**
      * The attributes that are mass assignable.
      *
@@ -63,7 +69,17 @@ class User extends Authenticatable
 
     public function prunable()
     {
-        return static::where('role', 'guest')
+        return static::where('role', self::TYPE_GUEST)
             ->where('created_at', '<', now()->subDays(3));
+    }
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->role === self::TYPE_ADMIN   && $this->hasVerifiedEmail();
+    }
+
+    public function getFilamentName(): string
+    {
+        return $this->username;
     }
 }
