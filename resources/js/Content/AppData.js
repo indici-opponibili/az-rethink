@@ -1,12 +1,12 @@
-import {levelsMap} from "@/Content/levels.js";
-import {chaptersMap} from "@/Content/chapters.js";
-import {glossaryWordsMap, glossaryWordsGroupsMap} from "@/Content/glossaryWords.js";
-import {coursesMap} from "@/Content/courses.js";
+import levels from "~/appData/levels.json";
+import chapters from "~/appData/chapters.json";
+import {glossaryWords, glossaryWordsGroups} from "~/appData/glossaryWords.json";
+import courses from "~/appData/courses.json";
 
 
 const coursesIds = [1]
 
-const getCourseFromId = (courseId) => composeCourse(coursesMap[courseId], courseId)
+const getCourseFromId = (courseId) => composeCourse(courses[courseId], courseId)
 
 const composeCourse = (courseRow, id) => {
     return {
@@ -16,7 +16,7 @@ const composeCourse = (courseRow, id) => {
     }
 }
 
-const getLevelFromId = (levelId) => composeLevel(levelsMap[levelId], levelId)
+const getLevelFromId = (levelId) => composeLevel(levels[levelId], levelId)
 
 const composeLevel = (levelRow, id) => {
     return {
@@ -26,7 +26,7 @@ const composeLevel = (levelRow, id) => {
     }
 }
 
-const getChapterFromId = (chapterId) => composeChapter(chaptersMap[chapterId], chapterId)
+const getChapterFromId = (chapterId) => composeChapter(chapters[chapterId], chapterId)
 
 const composeChapter = (chapterRow, id) => {
     return {
@@ -35,7 +35,7 @@ const composeChapter = (chapterRow, id) => {
     }
 }
 
-const getGlossaryGroupFromId = (glossaryGroupId) => composeGlossaryGroup(glossaryWordsGroupsMap[glossaryGroupId], glossaryGroupId)
+const getGlossaryGroupFromId = (glossaryGroupId) => composeGlossaryGroup(glossaryWordsGroups[glossaryGroupId], glossaryGroupId)
 
 const composeGlossaryGroup = (glossaryGroupRow, id) => {
     return {
@@ -47,11 +47,11 @@ const composeGlossaryGroup = (glossaryGroupRow, id) => {
 
 const getGlossaryWordFromId = (wordId) => (
     {
-        ...glossaryWordsMap[wordId],
+        ...glossaryWords[wordId],
         id : wordId
     })
 
 export const AppData = {
     courses : coursesIds.map(courses => getCourseFromId(courses)),
-    glossary : Object.keys(glossaryWordsGroupsMap).map(key => getGlossaryGroupFromId(parseInt(key))),
+    glossary : Object.keys(glossaryWordsGroups).map(key => getGlossaryGroupFromId(parseInt(key))),
 }

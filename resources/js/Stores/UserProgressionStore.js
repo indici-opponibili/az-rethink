@@ -1,16 +1,18 @@
 ﻿import {defineStore} from "pinia";
-import {achievements as achievementJson} from "@/Content/achievements.js";
-import {contentProgress as contentProgressJson} from "@/Content/contentProgress.js"
+import achievementJson from "~/appData/achievements.json";
+import contentProgressJson from "~/appData/contentProgress.json"
 import {AchievementObject} from "@/DataObjects/AchievementObject.js";
 import {ContentProgressObject} from "@/DataObjects/ContentProgressObject.js";
 import {AppData} from "@/Content/AppData.js";
 import {CourseProgressObject} from "@/DataObjects/CourseProgressObject.js";
+import {GlossaryWordProgressObject} from "@/DataObjects/GlossaryWordProgressObject.js";
 
 export const useUserProgressionStore = defineStore("userProgression", {
     state: () => ({
         achievementsMap : {},
         contentProgressMap : {},
         courseProgressMap : {},
+        glossaryWordsProgress : {},
     }),
     getters: {
         isAchievementComplete(state){
@@ -18,6 +20,9 @@ export const useUserProgressionStore = defineStore("userProgression", {
         },
         isContentProgressComplete(state){
             return (tag) => state.contentProgressMap[tag].isComplete();
+        },
+        isWordRead(state){
+            return (id) => state.glossaryWordsProgress[wordToProgress(id)].read
         },
         getLevelStatus(state){
             return (courseId, levelId) => {
@@ -40,16 +45,18 @@ export const useUserProgressionStore = defineStore("userProgression", {
         },
         populateContentProgress(remoteProgress){
             contentProgressJson.forEach(item => this.contentProgressMap[item.tag] = new ContentProgressObject(item))
-            AppData.glossary.forEach(group => group.items.forEach(word => {
-                const {tag, wordAsProgress} = wordToProgress(word.id)
-                this.contentProgressMap[tag] = new ContentProgressObject(wordAsProgress)
-            }))
             //a bit of error handling is needed
             remoteProgress.forEach(item => this.contentProgressMap[item.tag].advance(item.step))
         },
+        populateGlossaryWordsProgress(remoteProgress){
+            AppData.glossary.forEach(group => group.items.forEach(word => {
+                const tag = wordToProgress(word.id)
+                this.glossaryWordsProgress[tag] = new GlossaryWordProgressObject(tag)
+            }))
+            remoteProgress.forEach(item => this.glossaryWordsProgress[item.tag].setWordRead())
+        },
         populateCoursesProgress(remoteProgress){
             for (const course of AppData.courses){
-                console.log(course)
                 const courseTag = getCourseProgressTag(course.id)
                 this.courseProgressMap[courseTag] = new CourseProgressObject(courseTag)
                 for (const level of course.levels){
@@ -82,8 +89,7 @@ export const useUserProgressionStore = defineStore("userProgression", {
             return this.courseProgressMap[chapterTag].setStatus(status, true)
         },
         unlockWord(wordId){
-            const {tag} = wordToProgress(wordId)
-            return this.advanceContentProgress(tag)
+            return this.glossaryWordsProgress[wordToProgress(wordId)].setWordRead(true)
         }
     },
 })
@@ -102,13 +108,5 @@ function getChapterProgressTag(courseId, levelId, chapterId){
 }
 
 function wordToProgress(id){
-    const tag = `word_${id}`
-    return {
-        tag,
-        wordAsProgress : {
-            tag,
-            steps : 1,
-            category : "glossary_word"
-        }
-    }
+    return `word_${id}`
 }

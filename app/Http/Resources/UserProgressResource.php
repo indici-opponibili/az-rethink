@@ -17,6 +17,7 @@ class UserProgressResource extends JsonResource
         return [
             'achievements' => AchievementResource::collection($this->achievements),
             'contentProgress' => ContentProgressResource::collection($this->contentProgress),
+            'glossaryWordProgress' => GlossaryWordProgressResource::collection($this->glossaryWordProgress),
             'courseProgress' => CourseProgressResource::collection($this->courseProgress)
         ];
     }

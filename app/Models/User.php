@@ -57,6 +57,10 @@ class User extends Authenticatable
         return $this->hasMany(CourseProgress::class);
     }
 
+    public function glossaryWordProgress(): HasMany{
+        return $this->hasMany(GlossaryWordProgress::class);
+    }
+
     public function prunable()
     {
         return static::where('role', 'guest')

@@ -1,5 +1,5 @@
 import {redirectToHome} from "@/Libraries/middlewares/Utilities.js";
-import {coursesMap} from "@/Content/courses.js";
+import coursesMap from "~/appData/courses.json";
 import {extractCourseInfoFromRoute, extractLevelInfoFromRoute} from "@/Libraries/Routes/RoutesUtilities.js";
 import {AppData} from "@/Content/AppData.js";
 

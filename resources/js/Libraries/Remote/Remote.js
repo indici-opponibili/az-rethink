@@ -30,8 +30,14 @@ function addCourseProgressToUser(tag, status){
         .catch(err => console.log(err))
 }
 
+function addGlossaryWordProgressToUser(tag){
+    axios.post('/user/glossaryWord/add', {tag})
+        .catch(err => console.log(err))
+}
+
 export const remote = {
     addContentProgressToUser,
     addAchievementToUser,
-    addCourseProgressToUser
+    addCourseProgressToUser,
+    addGlossaryWordProgressToUser
 }

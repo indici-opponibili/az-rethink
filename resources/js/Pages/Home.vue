@@ -14,8 +14,12 @@ const UserProgression = useUserProgressionStore()
 UserProgression.populateAchievements(props.userProgression.data.achievements)
 UserProgression.populateContentProgress(props.userProgression.data.contentProgress)
 UserProgression.populateCoursesProgress(props.userProgression.data.courseProgress)
+UserProgression.populateGlossaryWordsProgress(props.userProgression.data.glossaryWordProgress)
+
+console.log(props.userProgression.data.glossaryWordProgress)
 
 UserProgression.setCourseStatus(1, "unlocked")
+UserProgression.unlockWord(1)
 
 const route = useRoute();
 
