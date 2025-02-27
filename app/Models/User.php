@@ -42,6 +42,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'username' => 'encrypted'
     ];
 
     public function achievements(): HasMany{
@@ -54,5 +55,11 @@ class User extends Authenticatable
 
     public function courseProgress(): HasMany{
         return $this->hasMany(CourseProgress::class);
+    }
+
+    public function prunable()
+    {
+        return static::where('role', 'guest')
+            ->where('created_at', '<', now()->subDays(3));
     }
 }

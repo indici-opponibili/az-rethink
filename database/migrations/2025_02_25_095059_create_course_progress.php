@@ -16,8 +16,10 @@ return new class extends Migration
             $table->timestamps();
             $table->string('tag');
             $table->string('status');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreignId('user_id')
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');;
             $table->unique(['user_id', 'tag', 'status']);
 
         });
