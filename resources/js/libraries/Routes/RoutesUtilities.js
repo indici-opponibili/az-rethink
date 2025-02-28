@@ -1,5 +1,5 @@
 import {useRoute} from "vue-router";
-import {AppData} from "@/Content/AppData.js";
+import {AppData} from "@/content/AppData.js";
 
 function extractOperaRouteInfo(){
     const route = useRoute()

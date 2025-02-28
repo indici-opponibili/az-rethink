@@ -1,7 +1,7 @@
-import {redirectToHome} from "@/Libraries/middlewares/Utilities.js";
+import {redirectToHome} from "@/libraries/middlewares/Utilities.js";
 import coursesMap from "~/appData/courses.json";
-import {extractCourseInfoFromRoute, extractLevelInfoFromRoute} from "@/Libraries/Routes/RoutesUtilities.js";
-import {AppData} from "@/Content/AppData.js";
+import {extractCourseInfoFromRoute, extractLevelInfoFromRoute} from "@/libraries/Routes/RoutesUtilities.js";
+import {AppData} from "@/content/AppData.js";
 
 function redirectIfOperaDoesntExist(to, from, next){
     if(Object.values(coursesMap).some(el => el.prettyName === to.params.courseId)){

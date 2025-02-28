@@ -1,6 +1,6 @@
-import {extractChapterInfoFromRoute, extractLevelInfoFromRoute} from "@/Libraries/Routes/RoutesUtilities.js";
+import {extractChapterInfoFromRoute, extractLevelInfoFromRoute} from "@/libraries/Routes/RoutesUtilities.js";
 import {useUserProgressionStore} from "@/Stores/UserProgressionStore.js";
-import {redirectToHome} from "@/Libraries/middlewares/Utilities.js";
+import {redirectToHome} from "@/libraries/middlewares/Utilities.js";
 
 function redirectIfChapterNotUnlocked(to, from, next){
     const routeInfo = extractChapterInfoFromRoute(to)

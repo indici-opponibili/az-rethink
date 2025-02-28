@@ -2,7 +2,8 @@
 import {useUserProgressionStore} from "@/Stores/UserProgressionStore.js";
 import {useRoute, useRouter} from "vue-router";
 import {onMounted} from "vue";
-import {unmute} from "@/Libraries/external/unmute.js";
+import {unmute} from "@/libraries/external/unmute.js";
+import initSW from "@/libraries/pushNotifications/PushNotifications.js";
 
 const props = defineProps({
     userProgression : {type : Object}
@@ -20,6 +21,10 @@ console.log(props.userProgression.data.glossaryWordProgress)
 
 UserProgression.setCourseStatus(1, "unlocked")
 UserProgression.unlockWord(1)
+UserProgression.advanceContentProgress("video_1_viewed")
+UserProgression.advanceContentProgress("audio_1_listened")
+
+initSW()
 
 const route = useRoute();
 

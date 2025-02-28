@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Notifications\TestNotification;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller

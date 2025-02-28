@@ -1,12 +1,22 @@
 ﻿[
     {
         "tag" : "video_1_viewed",
-        "category" : "viewed_videos",
+        "category" : "video",
         "steps" : 1
     },
     {
         "tag" : "video_2_viewed",
-        "category" : "viewed_videos",
+        "category" : "video",
+        "steps" : 1
+    },
+    {
+        "tag" : "audio_1_listened",
+        "category" : "audio",
+        "steps" : 1
+    },
+    {
+        "tag" : "pdf_1_downloaded",
+        "category" : "file",
         "steps" : 1
     }
 ]

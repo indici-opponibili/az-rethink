@@ -1,4 +1,4 @@
-﻿import {remote} from "@/Libraries/Remote/Remote.js";
+﻿import {remote} from "@/libraries/Remote/Remote.js";
 
 export class GlossaryWordProgressObject {
     constructor(tag) {

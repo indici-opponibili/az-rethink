@@ -8,11 +8,11 @@ import {
     redirectIfChapterDoesntExist,
     redirectIfLevelDoesntExist,
     redirectIfOperaDoesntExist
-} from "@/Libraries/middlewares/ContentExistCheckers.js";
+} from "@/libraries/middlewares/ContentExistCheckers.js";
 import {
     redirectIfChapterNotUnlocked,
     redirectIfLevelNotUnlocked
-} from "@/Libraries/middlewares/ContentUnlockedCheckers.js";
+} from "@/libraries/middlewares/ContentUnlockedCheckers.js";
 
 export const router = createRouter({
     history: createWebHistory(),

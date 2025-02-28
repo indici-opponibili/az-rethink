@@ -1,11 +1,11 @@
 ﻿import {defineStore} from "pinia";
 import achievementJson from "~/appData/achievements.json";
 import contentProgressJson from "~/appData/contentProgress.json"
-import {AchievementObject} from "@/DataObjects/AchievementObject.js";
-import {ContentProgressObject} from "@/DataObjects/ContentProgressObject.js";
-import {AppData} from "@/Content/AppData.js";
-import {CourseProgressObject} from "@/DataObjects/CourseProgressObject.js";
-import {GlossaryWordProgressObject} from "@/DataObjects/GlossaryWordProgressObject.js";
+import {AchievementObject} from "@/dataObjects/AchievementObject.js";
+import {ContentProgressObject} from "@/dataObjects/ContentProgressObject.js";
+import {AppData} from "@/content/AppData.js";
+import {CourseProgressObject} from "@/dataObjects/CourseProgressObject.js";
+import {GlossaryWordProgressObject} from "@/dataObjects/GlossaryWordProgressObject.js";
 
 export const useUserProgressionStore = defineStore("userProgression", {
     state: () => ({

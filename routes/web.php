@@ -6,6 +6,7 @@ use App\Http\Controllers\ContentProgressController;
 use App\Http\Controllers\CourseProgressController;
 use App\Http\Controllers\GlossaryWordProgressController;
 use App\Http\Controllers\PlatformConfigController;
+use App\Http\Controllers\PushController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -45,6 +46,11 @@ Route::post('/user/courseProgress/add', [CourseProgressController::class, 'addCo
 Route::post('/user/glossaryWord/add', [GlossaryWordProgressController::class, 'addGlossaryWordProgress'])
     ->middleware(['auth', 'verified']);
 
+Route::post('/subscribe-web-push',[PushController::class, 'store'])
+    ->middleware(['auth', 'verified']);
+
+Route::get('/notification', [PushController::class, 'notify'])
+    ->middleware(['auth', 'verified']);
 
 Route::get('/platformConfig/{path}', PlatformConfigController::class)
     ->where('path', '.*') // https://stackoverflow.com/q/34634758/11599600

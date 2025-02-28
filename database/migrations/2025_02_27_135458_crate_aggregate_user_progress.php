@@ -48,6 +48,24 @@ return new class extends Migration
                 LEFT JOIN users_achievements_count AS u_a ON u.id = u_a.user_id
                 LEFT JOIN users_glossary_words_count AS u_w ON u.id = u_w.user_id
         )");
+
+        /*
+         * Ha una grossa limitazione:
+         * La semantica è "numero medio di progressi di una categoria
+         * per quelli che hanno almeno un progresso in quella categoria"
+         * La limitazione è data dal fatto che non stiamo rispettando le forme normali del db
+
+        DB::statement("CREATE VIEW user_content_category_average AS (
+            SELECT uc.category, AVERAGE(u.category_amount) AS average_amount
+            FROM (
+                SELECT u.id, p.category, COUNT(p.id) as category_amount
+                FROM users as u
+                    JOIN content_progress AS p ON u.id = p.user_id
+                GROUP BY u.id, p.category
+            ) AS uc
+            GROUP BY uc.category
+        )");
+        */
     }
 
     /**
@@ -60,5 +78,6 @@ return new class extends Migration
         DB::statement("DROP VIEW IF EXISTS users_achievements_count");
         DB::statement("DROP VIEW IF EXISTS users_glossary_words_count");
         DB::statement("DROP VIEW IF EXISTS user_progress_aggregate_data");
+        DB::statement("DROP VIEW IF EXISTS user_content_category_average");
     }
 };
