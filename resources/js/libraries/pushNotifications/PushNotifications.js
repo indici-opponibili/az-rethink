@@ -13,15 +13,16 @@ export default function initSW() {
         return;
     }
 
+    if(!import.meta.env.VITE_VAPID_PUBLIC_KEY){
+        throw new Error('VITE_VAPID_PUBLIC_KEY not found in .env! You should execute "php artisan webpush:vapid"' +
+            ' e then copy VAPID_PUBLIC_KEY value in VITE_VAPID_PUBLIC_KEY')
+    }
+
     //register the service worker
     navigator.serviceWorker.register('/sw.js')
         .then(() => {
-            console.log('serviceWorker installed!')
             initPush();
         })
-        .catch((err) => {
-            console.log(err)
-        });
 }
 
 function initPush() {
@@ -60,21 +61,20 @@ function subscribeUser() {
             return registration.pushManager.subscribe(subscribeOptions);
         })
         .then((pushSubscription) => {
-            console.log('Received PushSubscription: ', JSON.stringify(pushSubscription));
             storePushSubscription(pushSubscription);
         });
 }
 
 function urlBase64ToUint8Array(base64String) {
-    var padding = '='.repeat((4 - base64String.length % 4) % 4);
-    var base64 = (base64String + padding)
-        .replace(/\-/g, '+')
+    const padding = '='.repeat((4 - base64String.length % 4) % 4);
+    const base64 = (base64String + padding)
+        .replace(/-/g, '+')
         .replace(/_/g, '/');
 
-    var rawData = window.atob(base64);
-    var outputArray = new Uint8Array(rawData.length);
+    const rawData = window.atob(base64);
+    const outputArray = new Uint8Array(rawData.length);
 
-    for (var i = 0; i < rawData.length; ++i) {
+    for (let i = 0; i < rawData.length; ++i) {
         outputArray[i] = rawData.charCodeAt(i);
     }
     return outputArray;
